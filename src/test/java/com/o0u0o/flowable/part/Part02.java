@@ -3,10 +3,13 @@ package com.o0u0o.flowable.part;
 import com.o0u0o.flowable.FlowableHiApplicationTests;
 import org.flowable.engine.ProcessEngine;
 import org.flowable.engine.RuntimeService;
+import org.flowable.engine.TaskService;
 import org.flowable.engine.runtime.ProcessInstance;
+import org.flowable.task.api.Task;
 import org.junit.Test;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,6 +21,7 @@ public class Part02 extends FlowableHiApplicationTests {
 
     /**
      * <h2>启动你那个流程实例</h2>
+     * 启动一个流程实例
      */
     @Test
     public void testRunProcess(){
@@ -37,7 +41,52 @@ public class Part02 extends FlowableHiApplicationTests {
 
         System.out.println("holidayRequest.getDeploymentId:" + holidayRequest.getDeploymentId());
         System.out.println("holidayRequest.getName:" + holidayRequest.getName());
-
-        //
+        System.out.println("holidayRequest.getActivityId:" + holidayRequest.getActivityId());
     }
+
+    /**
+     * <h1>测试任务查询</h1>
+     */
+    @Test
+    public void testQueryTask(){
+        ProcessEngine processEngine = configuration.buildProcessEngine();
+
+        TaskService taskService = processEngine.getTaskService();
+        //指定查询的流程编号
+        List<Task> tasks = taskService.createTaskQuery()
+                .processDefinitionKey("holidayRequest")
+                .taskAssignee("zhangsan").list();
+
+        for (Task task: tasks){
+            System.out.println("task.getProcessDefinitionId:" + task.getProcessDefinitionId());
+            System.out.println("task.getName:" + task.getName());
+            System.out.println("task.getAssignee:" + task.getAssignee());
+            System.out.println("task.getDescription() = " + task.getDescription());
+            System.out.println("task.getId() = " + task.getId());
+        }
+
+    }
+
+    /**
+     * <h2>处理完成任务</h2>
+     */
+    @Test
+    public void testCompleteTask(){
+        ProcessEngine processEngine = configuration.buildProcessEngine();
+        TaskService taskService = processEngine.getTaskService();
+        Task task = taskService.createTaskQuery()
+                .processDefinitionKey("holidayRequest")
+                .taskAssignee("zhangsan").singleResult();
+
+        //创建流程变量
+        Map<String, Object> variables = new HashMap<>();
+        variables.put("approved", false);
+
+
+        //完成任务
+        taskService.complete(task.getId(), variables);
+    }
+
+
+
 }
