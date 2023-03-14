@@ -13,6 +13,9 @@ import org.flowable.engine.repository.ProcessDefinitionQuery;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * <h1>Part01</h1>
  * @author o0u0o
@@ -26,15 +29,15 @@ public class Part01 extends FlowableHiApplicationTests {
     @Test
     public void testProcessEngine(){
         //获取 ProcessEngineConfiguration 对象
-        ProcessEngineConfiguration configuration = new StandaloneProcessEngineConfiguration();
+//        ProcessEngineConfiguration configuration = new StandaloneProcessEngineConfiguration();
 
         //配置相关的数据库连接信息(后期放到属性文件去)
-        configuration.setJdbcDriver("com.mysql.cj.jdbc.Driver");
-        configuration.setJdbcUsername("root");
-        configuration.setJdbcPassword("Mysql8.0");
-        configuration.setJdbcUrl("jdbc:mysql://localhost:3306/flowable-learn?serverTimezone=UTC&nullCatalogMeansCurrent=TRUE");
+//        configuration.setJdbcDriver("com.mysql.cj.jdbc.Driver");
+//        configuration.setJdbcUsername("root");
+//        configuration.setJdbcPassword("Mysql8.0");
+//        configuration.setJdbcUrl("jdbc:mysql://localhost:3306/flowable-learn?serverTimezone=UTC&nullCatalogMeansCurrent=TRUE");
         //如果数据库中标结构不存在，就新建
-        configuration.setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
+//        configuration.setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
 
 
         //通过ProcessEngineConfiguration构建我们需要的processEngine 对象
@@ -53,13 +56,32 @@ public class Part01 extends FlowableHiApplicationTests {
         RepositoryService repositoryService = processEngine.getRepositoryService();
         //3.关联要部署的文件 并且完成流程的部署操作
         Deployment deploy = repositoryService.createDeployment()
-                .addClasspathResource("holiday-request.bpmn20.xml")
-                .name("请假流程")
+                .addClasspathResource("需求提报.bpmn20.xml")
+                .name("需求提报")
                 //部署流程
                 .deploy();
 
         System.out.println("deploy.getId:" + deploy.getId());
         System.out.println("deploy.getName:" + deploy.getName());
+    }
+
+    /**
+     * <h2>查询所有的流程定义</h2>
+     */
+    @Test
+    public void testDeployQueryList(){
+        ProcessEngine processEngine = configuration.buildProcessEngine();
+        RepositoryService repositoryService = processEngine.getRepositoryService();
+        ProcessDefinitionQuery processDefinitionQuery = repositoryService.createProcessDefinitionQuery();
+        List<ProcessDefinition> list = processDefinitionQuery.list();
+        list.stream().forEach(e -> {
+            System.out.println("=====================");
+            System.out.println("e.getId() = " + e.getId());
+            System.out.println("e.getDeploymentId() = " + e.getDeploymentId());
+            System.out.println("e.getKey() = " + e.getKey());
+            System.out.println("e.getName() = " + e.getName());
+            System.out.printf("=====================");
+        });
     }
 
     /**
@@ -76,6 +98,7 @@ public class Part01 extends FlowableHiApplicationTests {
         System.out.println("DefKey：" + processDefinition.getKey());
     }
 
+
     /**
      * <h2>删除流程定义</h2>
      */
@@ -86,7 +109,8 @@ public class Part01 extends FlowableHiApplicationTests {
         //删除部署的流程，第一个参数是id 如果部署的流程启动了就不允许删除了
         //repositoryService.deleteDeployment("1");
 
+        String deploymentId= "1";
         //第二个参数是true 级联删除，如果流程启动了，相关的任务一并会删除掉
-        repositoryService.deleteDeployment("25001", true);
+        repositoryService.deleteDeployment(deploymentId, true);
     }
 }

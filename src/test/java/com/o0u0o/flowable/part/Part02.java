@@ -45,7 +45,7 @@ public class Part02 extends FlowableHiApplicationTests {
     }
 
     /**
-     * <h1>测试任务查询</h1>
+     * <h2>测试任务查询</h2>
      */
     @Test
     public void testQueryTask(){
@@ -63,6 +63,7 @@ public class Part02 extends FlowableHiApplicationTests {
             System.out.println("task.getAssignee:" + task.getAssignee());
             System.out.println("task.getDescription() = " + task.getDescription());
             System.out.println("task.getId() = " + task.getId());
+            System.out.println("task.getTaskDefinitionKey() = " + task.getTaskDefinitionKey());
         }
 
     }
