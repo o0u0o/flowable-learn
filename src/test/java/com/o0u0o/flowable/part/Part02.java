@@ -77,12 +77,12 @@ public class Part02 extends FlowableHiApplicationTests {
         TaskService taskService = processEngine.getTaskService();
         Task task = taskService.createTaskQuery()
                 .processDefinitionKey("holidayRequest")
-                .taskAssignee("zhangsan").singleResult();
+                .taskAssignee("zhangsan")
+                .singleResult();
 
         //创建流程变量
         Map<String, Object> variables = new HashMap<>();
         variables.put("approved", false);
-
 
         //完成任务
         taskService.complete(task.getId(), variables);

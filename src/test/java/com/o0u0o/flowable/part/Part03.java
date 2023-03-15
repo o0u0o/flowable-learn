@@ -37,9 +37,9 @@ public class Part03 extends FlowableHiApplicationTests {
         for (HistoricActivityInstance history : list) {
             System.out.println("history.getActivityId() = " + history.getActivityId());
             System.out.println("history.getAssignee() = " + history.getAssignee());
-
-
         }
+
+
 
     }
 }

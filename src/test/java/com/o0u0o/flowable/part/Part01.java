@@ -2,19 +2,13 @@ package com.o0u0o.flowable.part;
 
 import com.o0u0o.flowable.FlowableHiApplicationTests;
 import org.flowable.engine.ProcessEngine;
-import org.flowable.engine.ProcessEngineConfiguration;
 import org.flowable.engine.RepositoryService;
-import org.flowable.engine.RuntimeService;
-import org.flowable.engine.impl.cfg.StandaloneProcessEngineConfiguration;
 import org.flowable.engine.repository.Deployment;
-import org.flowable.engine.repository.DeploymentQuery;
 import org.flowable.engine.repository.ProcessDefinition;
 import org.flowable.engine.repository.ProcessDefinitionQuery;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * <h1>Part01</h1>
@@ -57,7 +51,7 @@ public class Part01 extends FlowableHiApplicationTests {
         //3.关联要部署的文件 并且完成流程的部署操作
         Deployment deploy = repositoryService.createDeployment()
                 .addClasspathResource("需求提报.bpmn20.xml")
-                .name("需求提报")
+                .name("需求提报流程")
                 //部署流程
                 .deploy();
 
