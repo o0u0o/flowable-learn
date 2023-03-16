@@ -50,7 +50,7 @@ public class Part01 extends FlowableHiApplicationTests {
         RepositoryService repositoryService = processEngine.getRepositoryService();
         //3.关联要部署的文件 并且完成流程的部署操作
         Deployment deploy = repositoryService.createDeployment()
-                .addClasspathResource("需求提报.bpmn20.xml")
+                .addClasspathResource("demand.bpmn20.xml")
                 .name("需求提报流程")
                 //部署流程
                 .deploy();
@@ -70,10 +70,11 @@ public class Part01 extends FlowableHiApplicationTests {
         List<ProcessDefinition> list = processDefinitionQuery.list();
         list.stream().forEach(e -> {
             System.out.println("=====================");
-            System.out.println("e.getId() = " + e.getId());
-            System.out.println("e.getDeploymentId() = " + e.getDeploymentId());
-            System.out.println("e.getKey() = " + e.getKey());
-            System.out.println("e.getName() = " + e.getName());
+            System.out.println("processDefinitionId:" + e.getId());
+            System.out.println("processDefinitionName:" + e.getName());
+            System.out.println("processDefinitionKey：" + e.getKey());
+            System.out.println("processDefinitionDeploymentId() = " + e.getDeploymentId());
+
             System.out.printf("=====================");
         });
     }
@@ -86,10 +87,10 @@ public class Part01 extends FlowableHiApplicationTests {
         ProcessEngine processEngine = configuration.buildProcessEngine();
         RepositoryService repositoryService = processEngine.getRepositoryService();
         ProcessDefinitionQuery processDefinitionQuery = repositoryService.createProcessDefinitionQuery();
-        ProcessDefinition processDefinition = processDefinitionQuery.deploymentId("10001").singleResult();
-        System.out.println("DefId:" + processDefinition.getId());
-        System.out.println("DefName:" + processDefinition.getName());
-        System.out.println("DefKey：" + processDefinition.getKey());
+        ProcessDefinition processDefinition = processDefinitionQuery.deploymentId("1").singleResult();
+        System.out.println("processDefinitionId:" + processDefinition.getId());
+        System.out.println("processDefinitionName:" + processDefinition.getName());
+        System.out.println("processDefinitionKey：" + processDefinition.getKey());
     }
 
 
