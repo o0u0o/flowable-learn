@@ -32,12 +32,14 @@ public class Part02 extends FlowableHiApplicationTests {
 
         //2.构建流程变量(业务中的表单数据)
         Map<String, Object> variables = new HashMap<>();
+        variables.put("assignee_node2", "zhangsan");
         variables.put("employee", "张三");
         variables.put("nrOfHolidays", 3);
         variables.put("description", "工作累了！出去玩玩！");
-        ProcessInstance holidayRequest = runtimeService.startProcessInstanceByKey("holidayRequest", variables);
+        //businessKey 是业务的上的ID，比如是订单ID
+        //ProcessInstance holidayRequest = runtimeService.startProcessInstanceByKey("holidayRequest", "order:10001", variables);
         //3.启动流程实例
-        //ProcessInstance holidayRequest = runtimeService.startProcessInstanceById("3:7503", variables);
+        ProcessInstance holidayRequest = runtimeService.startProcessInstanceById("flow_bw0vixvd:1:4", variables);
 
         System.out.println("holidayRequest.getDeploymentId:" + holidayRequest.getDeploymentId());
         System.out.println("holidayRequest.getName:" + holidayRequest.getName());
@@ -50,20 +52,26 @@ public class Part02 extends FlowableHiApplicationTests {
     @Test
     public void testQueryTask(){
         ProcessEngine processEngine = configuration.buildProcessEngine();
-
         TaskService taskService = processEngine.getTaskService();
+        String processDefinitionKey = "flow_bw0vixvd";
+        String candidateUser = "zhangsan";
         //指定查询的流程编号
         List<Task> tasks = taskService.createTaskQuery()
-                .processDefinitionKey("holidayRequest")
-                .taskAssignee("zhangsan").list();
+                .active()
+                .includeProcessVariables()
+                //.processDefinitionKey(processDefinitionKey)
+                .taskCandidateUser(candidateUser)
+                .list();
 
         for (Task task: tasks){
+            System.out.println("=========== 我的任务列表 ==========");
             System.out.println("task.getProcessDefinitionId:" + task.getProcessDefinitionId());
             System.out.println("task.getName:" + task.getName());
             System.out.println("task.getAssignee:" + task.getAssignee());
-            System.out.println("task.getDescription() = " + task.getDescription());
-            System.out.println("task.getId() = " + task.getId());
+            System.out.println("task.getDescription:" + task.getDescription());
+            System.out.println("task.getId:" + task.getId());
             System.out.println("task.getTaskDefinitionKey() = " + task.getTaskDefinitionKey());
+            System.out.println("task.getProcessVariables() = " + task.getProcessVariables());
         }
 
     }

@@ -40,8 +40,8 @@ public class Part01 extends FlowableHiApplicationTests {
 
     /**
      * <h2>测试部署</h2>
+     * 将流程模型部署到数据库
      */
-
     @Test
     public void testDeploy(){
         //1.获取 processEngine 对象
@@ -50,7 +50,7 @@ public class Part01 extends FlowableHiApplicationTests {
         RepositoryService repositoryService = processEngine.getRepositoryService();
         //3.关联要部署的文件 并且完成流程的部署操作
         Deployment deploy = repositoryService.createDeployment()
-                .addClasspathResource("demand.bpmn20.xml")
+                .addClasspathResource("bpmn/demand.bpmn20.xml")
                 .name("需求提报流程")
                 //部署流程
                 .deploy();
