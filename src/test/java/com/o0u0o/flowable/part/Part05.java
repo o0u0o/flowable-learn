@@ -1,8 +1,8 @@
 package com.o0u0o.flowable.part;
 import com.o0u0o.flowable.FlowableHiApplicationTests;
 import org.flowable.engine.ProcessEngine;
-import org.flowable.engine.RepositoryService;
-import org.flowable.engine.repository.Deployment;
+import org.flowable.engine.ProcessEngines;import org.flowable.engine.RepositoryService;
+import org.flowable.engine.RuntimeService;import org.flowable.engine.repository.Deployment;
 import org.junit.Test;
 
 /**
@@ -30,6 +30,16 @@ public class Part05 extends FlowableHiApplicationTests {
 
         System.out.println("deploy.getId:" + deploy.getId());
         System.out.println("deploy.getName:" + deploy.getName());
-
     }
+
+    /**
+     * <h1>启动流程实例</h1>
+     */
+    @Test
+    public void testProcess(){
+        ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
+        RuntimeService runtimeService = engine.getRuntimeService();
+        runtimeService.startProcessInstanceById("请假流程:1:3");
+    }
+
 }

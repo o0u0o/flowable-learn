@@ -1,5 +1,11 @@
 package com.o0u0o.flowable.part;
-import org.flowable.engine.ProcessEngine;import org.flowable.engine.ProcessEngines;import org.flowable.engine.RepositoryService;import org.flowable.engine.repository.ProcessDefinition;import org.flowable.engine.repository.ProcessDefinitionQuery;import org.junit.Test; /**
+import org.flowable.engine.ProcessEngine;
+import org.flowable.engine.ProcessEngines;
+import org.flowable.engine.RepositoryService;
+import org.flowable.engine.repository.ProcessDefinition;
+import org.flowable.engine.repository.ProcessDefinitionQuery;
+import org.junit.Test;
+/**
  * <h1></h1>
  * @author o0u0o
  * @date 2023/3/15 9:59 PM
@@ -27,14 +33,13 @@ public class Part04 {
             System.out.println("激活流程：" + processDefinition.getId() + processDefinition.getName());
             repositoryService.activateProcessDefinitionById("holiday:1:4");
         }
+
         else {
             //当前的流程是激活状态
             System.out.println("挂起流程：" + processDefinition.getId() + processDefinition.getName());
             //我们可以挂起当前的流程
             repositoryService.suspendProcessDefinitionByKey("holiday:1:4");
-
         }
-
     }
 
 }
