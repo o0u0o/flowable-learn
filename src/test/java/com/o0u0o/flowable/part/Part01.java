@@ -74,7 +74,7 @@ public class Part01 extends FlowableHiApplicationTests {
             System.out.println("processDefinitionName:" + e.getName());
             System.out.println("processDefinitionKey：" + e.getKey());
             System.out.println("processDefinitionDeploymentId() = " + e.getDeploymentId());
-
+            System.out.println("e.getDeploymentId:" + e.getDeploymentId());
             System.out.printf("=====================");
         });
     }

@@ -1,4 +1,4 @@
-package com.o0u0o.flowable;
+package com.o0u0o.flowable.mail;
 
 import org.flowable.engine.delegate.DelegateExecution;
 import org.flowable.engine.delegate.JavaDelegate;
