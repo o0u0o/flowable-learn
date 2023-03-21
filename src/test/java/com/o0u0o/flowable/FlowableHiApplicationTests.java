@@ -4,7 +4,7 @@ import org.flowable.engine.ProcessEngine;import org.flowable.engine.ProcessEngin
 import org.flowable.engine.impl.cfg.StandaloneProcessEngineConfiguration;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.beans.factory.annotation.Autowired;import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class FlowableHiApplicationTests {
