@@ -3,7 +3,7 @@
   <process id="holiday-candidate" name="请假流程-候选人" isExecutable="true">
     <documentation>请假流程-候选人</documentation>
     <startEvent id="startEvent1" flowable:formFieldValidation="true"></startEvent>
-    <userTask id="sid-C5D59253-01EC-4D90-A269-39E55677EDA3" name="创建请假单" flowable:candidateUsers="${assignee1},${assignee2},${assignee3}" flowable:formFieldValidation="true"></userTask>
+    <userTask id="sid-C5D59253-01EC-4D90-A269-39E55677EDA3" name="创建请假单" flowable:candidateUsers="${candidate1},${candidate2},${candidate3}" flowable:formFieldValidation="true"></userTask>
     <sequenceFlow id="sid-9E2FFA14-4C86-43E8-AB0C-8A80AA2A0775" sourceRef="startEvent1" targetRef="sid-C5D59253-01EC-4D90-A269-39E55677EDA3"></sequenceFlow>
     <userTask id="sid-A1FC9F07-1900-459E-A4A9-395BBE08D794" name="经理审批" flowable:assignee="wz" flowable:formFieldValidation="true">
       <extensionElements>

@@ -80,7 +80,8 @@ public class Part01 extends FlowableHiApplicationTests {
     }
 
     /**
-     * <h2>查询流程定义的信息</h2>
+     * <h2>定义流程列表</h2>
+     * 查询流程定义的信息
      */
     @Test
     public void testDeployQuery(){

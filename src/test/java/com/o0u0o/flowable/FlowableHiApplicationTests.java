@@ -1,6 +1,6 @@
 package com.o0u0o.flowable;
 
-import org.flowable.engine.ProcessEngineConfiguration;
+import org.flowable.engine.ProcessEngine;import org.flowable.engine.ProcessEngineConfiguration;
 import org.flowable.engine.impl.cfg.StandaloneProcessEngineConfiguration;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
@@ -9,14 +9,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class FlowableHiApplicationTests {
 
+    @Autowired
+    private ProcessEngine processEngine;
+
     @Test
     void contextLoads() {
+        System.out.println("processEngine:" + processEngine);
     }
 
 
     public ProcessEngineConfiguration configuration = null;
 
-    @Before
+    //@Before
     public void before(){
         //获取 ProcessEngineConfiguration 对象
         configuration = new StandaloneProcessEngineConfiguration();
