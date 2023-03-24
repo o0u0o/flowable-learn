@@ -5,7 +5,8 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/flowable-learn?serverTimezone=UTC&nullCatalogMeansCurrent=true
+    //url: jdbc:mysql://localhost:3306/flowable-learn?serverTimezone=UTC&nullCatalogMeansCurrent=true
+    url: jdbc:mysql://localhost:3306/px_demand_manage_test?serverTimezone=UTC&nullCatalogMeansCurrent=true
     username: root
     password: Mysql8.0
     hikari:
@@ -20,6 +21,7 @@ spring:
 
 # flowable相关配置
 flowable:
-  async-executor-activate: false #关闭定时任务JOB
+  #关闭定时任务JOB
+  async-executor-activate: false
   #  将databaseSchemaUpdate设置为true。当Flowable发现库与数据库表结构不一致时，会自动将数据库表结构升级至新版本。
   database-schema-update: true
